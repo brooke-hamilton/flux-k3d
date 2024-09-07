@@ -1,0 +1,40 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+	"name": "flux-k3d",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"minikube": "none"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"version": "latest",
+			"moby": true
+		},
+		"ghcr.io/rio/features/k3d:1": {},
+		"ghcr.io/dapr/cli/dapr-cli:0": {},
+		"./features/radius": {},
+		"./features/flux": {}
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"davidanson.vscode-markdownlint",
+				"github.vscode-github-actions",
+				"inercia.vscode-k3d",
+				"ms-azuretools.vscode-bicep",
+				"ms-kubernetes-tools.vscode-kubernetes-tools",
+				"ms-azuretools.vscode-dapr",
+				"redhat.vscode-yaml"
+			]
+		}
+	},
+	// Mount the GitHub CLI configuration
+	"mounts": [
+		"source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind"
+	]
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+}
