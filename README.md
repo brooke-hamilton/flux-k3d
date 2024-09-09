@@ -26,4 +26,4 @@ This repo contains a dev container configured to run [Flux](https://fluxcd.io/) 
 
 The script finishes by running the `flux get kustomizations -w` command, which will interactively display the output of the Flux operations. This command can be cancelled without affecting the Flux deployment. While this command is running, you can open another terminal window in the dev container to watch the pods being created: `kubectl get pods -w`. (Pods will be created in the default namespace.)
 
-Run `reset_flux.sh <repo name>` to reset the local Kubernetes environment and remove the Flux configuration files from the remote repo.
+Run `reset_flux.sh <repo name>` to delete the local k3d Kubernetes cluster and remove the Flux configuration files from the remote repo.
