@@ -18,6 +18,7 @@ reset_remove_repo() {
     fi
 
     echo "Deleting all files from $repo_dir and pushing the changes."
+    git -C "$repo_dir" reset --hard HEAD # Remove any pending changes
     rm -rf "${repo_dir:?}/"*
     commit_and_push "$repo_dir" "reset $(git rev-parse --short HEAD)"
 

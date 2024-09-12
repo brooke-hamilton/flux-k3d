@@ -11,7 +11,7 @@ source "$current_dir/bash_functions/gh_utils.sh"
 ensure_gh_login && set_gh_vars "$current_dir"
 
 if ! gh repo view "$TENANT_REPO_NAME" &> /dev/null; then
-    gh repo create "$TENANT_REPO_NAME" --private
+    gh repo create "$TENANT_REPO_NAME" --public
 else
     echo "Repo $TENANT_REPO_NAME already exists."
 fi
