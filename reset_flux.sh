@@ -1,25 +1,35 @@
 #!/bin/bash
 
 # Description: Removes the flux files from the remote repo, deletes the local files, and deletes the local k3d cluster.
-# Usage: ./reset_flux.sh <repository name>
+# Usage: ./reset_flux.sh
 
 set -e
 current_dir=$(dirname "$0")
 source "$current_dir/bash_functions/gh_utils.sh"
 
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 <repository name>"
-    exit 1
-fi
+ensure_gh_login && set_gh_vars "$current_dir"
 
-# repo_name=$1
-# current_dir=$(dirname "$0")
+# Removes all files from the repo and commits the changes. Then deletes the local clone.
+reset_remove_repo() {
+    local repo_dir=$1
+    
+    if [ ! -d "$repo_dir" ]; then
+        return
+    fi
 
-# ensure_gh_login
+    echo "Deleting all files from $repo_dir and pushing the changes."
+    rm -rf "${repo_dir:?}/"*
+    commit_and_push "$repo_dir" "reset $(git rev-parse --short HEAD)"
 
-# k3d cluster delete
-# rm -rf "$current_dir/repos/$repo_name/clusters/"
-# git -C "$current_dir/repos/$repo_name/" add -A
-# git -C "$current_dir/repos/$repo_name/" commit -m "reset $(git rev-parse --short HEAD)"
-# git -C "$current_dir/repos/$repo_name/" push
-# rm -rf "$current_dir/repos/$repo_name/"
+    echo "Removing the local clone of $repo_dir."
+    rm -rf "$repo_dir"    
+}
+
+# Iterate over k3d clusters and delete them
+for cluster in $(k3d cluster list -o json | jq -r '.[].name'); do
+    k3d cluster delete "$cluster"
+done
+
+# Reset the tenant and platform-admin repos to the empty state and remove local clones.
+reset_remove_repo "$PLATFORM_ADMIN_LOCAL_DIR"
+reset_remove_repo "$TENANT_REPO_LOCAL_DIR"

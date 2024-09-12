@@ -8,7 +8,7 @@ set -e
 current_dir=$(dirname "$0")
 source "$current_dir/bash_functions/gh_utils.sh"
 
-ensure_gh_login && set_gh_vars
+ensure_gh_login && set_gh_vars "$current_dir"
 
 if ! gh repo view "$TENANT_REPO_NAME" &> /dev/null; then
     gh repo create "$TENANT_REPO_NAME" --private
