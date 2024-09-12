@@ -14,7 +14,8 @@
 		"ghcr.io/rio/features/k3d:1": {},
 		"ghcr.io/dapr/cli/dapr-cli:0": {},
 		"./features/radius": {},
-		"./features/flux": {}
+		"./features/flux": {},
+		"./features/yq": {}
 	},
 	"customizations": {
 		"vscode": {
