@@ -5,7 +5,7 @@ This repo contains a dev container configured to run [Flux](https://fluxcd.io/) 
 ## Prerequisites
 
 - A personal GitHub account where you can create repos.
-- A host machine that can run a dev container.
+- A host machine that can run a [dev container](https://code.visualstudio.com/docs/devcontainers/containers).
 - The host machine has git and the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli/quickstart) installed.
 
 ## Contents of the dev container
