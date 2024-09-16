@@ -1,0 +1,3 @@
+# Configuration settings for the ShellCheck tool.
+source-path=SCRIPTDIR/bash_functions
+external-sources=true

@@ -14,7 +14,8 @@
 		"ghcr.io/rio/features/k3d:1": {},
 		"ghcr.io/dapr/cli/dapr-cli:0": {},
 		"./features/radius": {},
-		"./features/flux": {}
+		"./features/flux": {},
+		"./features/yq": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -25,16 +26,15 @@
 				"ms-azuretools.vscode-bicep",
 				"ms-kubernetes-tools.vscode-kubernetes-tools",
 				"ms-azuretools.vscode-dapr",
-				"redhat.vscode-yaml"
+				"redhat.vscode-yaml",
+				"timonwong.shellcheck"
 			]
 		}
 	},
-	// Mount the GitHub CLI configuration
+	// Mount the GitHub CLI configuration - requires the GitHub CLI to be installed on the host.
 	"mounts": [
 		"source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind"
-	]
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
+	],
+	// Enable bash completion for kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-kubectl-autocompletion
+	"onCreateCommand": "kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null && sudo chmod a+r /etc/bash_completion.d/kubectl"
 }
