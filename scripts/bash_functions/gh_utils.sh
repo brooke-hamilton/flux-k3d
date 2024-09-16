@@ -20,13 +20,14 @@ set_gh_vars() {
     fi
 
     base_repo_name="radflux"
+    REPOS_DIR="$current_dir/../repos" && export REPOS_DIR
     GITHUB_USER=$(gh api user | jq -r .login) && export GITHUB_USER
     GITHUB_TOKEN=$(gh auth token) && export GITHUB_TOKEN
     TENANT_REPO_NAME="$GITHUB_USER/$base_repo_name-tenant" && export TENANT_REPO_NAME
     PLATFORM_ADMIN_REPO_NAME="$GITHUB_USER/$base_repo_name-platform-admin" && export PLATFORM_ADMIN_REPO_NAME
-    TENANT_REPO_LOCAL_DIR="$current_dir/repos/$(echo "$TENANT_REPO_NAME" | cut -d'/' -f2)" \
+    TENANT_REPO_LOCAL_DIR="$REPOS_DIR/$(echo "$TENANT_REPO_NAME" | cut -d'/' -f2)" \
         && export TENANT_REPO_LOCAL_DIR
-    PLATFORM_ADMIN_LOCAL_DIR="$current_dir/repos/$(echo "$PLATFORM_ADMIN_REPO_NAME" | cut -d'/' -f2)" \
+    PLATFORM_ADMIN_LOCAL_DIR="$REPOS_DIR/$(echo "$PLATFORM_ADMIN_REPO_NAME" | cut -d'/' -f2)" \
         && export PLATFORM_ADMIN_LOCAL_DIR
 }
 
