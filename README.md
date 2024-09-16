@@ -16,8 +16,6 @@ This repo contains a dev container configured to run [Flux](https://fluxcd.io/) 
 - Dapr
 - GitHub CLI (The host machine configuration GH CLI configuration is mounted in the container.)
 
-> Note: The `.gitignore` file in this repo excludes the `repos` folder because that is where the scripts will perform local git operations on remote GitHub repos.
-
 ## Step-by-step
 
 1. From the host machine, verify the prerequisites and launch the dev container. The rest of the steps are done within the dev container.
@@ -35,3 +33,5 @@ This repo contains a dev container configured to run [Flux](https://fluxcd.io/) 
 The script finishes by running the `flux get kustomizations -w` command, which will interactively display the output of the Flux operations. This command can be cancelled without affecting the Flux deployment. While this command is running, you can open another terminal window in the dev container to watch the pods being created: `kubectl get pods -A -w`.
 
 Run `.\scripts\reset_flux.sh` to delete the local k3d Kubernetes cluster and remove the Flux configuration files from the remote repo. (This script will is also run by `bootstrap.sh`.)
+
+> Note: The `.gitignore` file in this repo excludes the `repos` folder because that is where the scripts will perform local git operations on remote GitHub repos.
