@@ -34,7 +34,5 @@
 	// Mount the GitHub CLI configuration - requires the GitHub CLI to be installed on the host.
 	"mounts": [
 		"source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind"
-	],
-	// Enable bash completion for kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-kubectl-autocompletion
-	"onCreateCommand": "kubectl completion bash | sudo tee /etc/bash_completion.d/kubectl > /dev/null && sudo chmod a+r /etc/bash_completion.d/kubectl"
+	]
 }
